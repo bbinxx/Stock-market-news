@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" rel="stylesheet">
-
+    <title>Search News</title>
 </head>
 <body>
-<div class="container">
-    <div class="well text-center">
-        <h3>CMPE 321 Project 3</h3>
-    </div>
-    <div class="container text-center">
-        <form action="/homeAdmin">
-            <input type="submit" class="btn btn-primary" value="Login As Admin" />
-        </form>
-        <div style="margin:5px;"></div>
-        <form action="/homeUser">
-            <input type="submit" class="btn btn-primary" value="Login As User" />
-        </form>
-    </div>
-</div>
-
+    <h1>Search News</h1>
+    <form action="/" method="get">
+        <input type="text" name="search_query" value="{{ search_query }}" placeholder="Enter your search term">
+        <button type="submit">Search</button>
+    </form>
+    {% if news_data %}
+        <h2>Results for "{{ search_query }}"</h2>
+        <ul>
+            {% for article in news_data['articles'] %}
+              <li><a href="{{ article['url'] }}">{{ article['title'] }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found. Try a different search term.</p>
+    {% endif %}
 </body>
 </html>
