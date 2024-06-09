@@ -5,18 +5,26 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Search News</h1>
+    <h1>Search News about Stock Market</h1>
     <form action="/" method="get">
         <input type="text" name="search_query" value="{{ search_query }}" placeholder="Enter your search term">
         <button type="submit">Search</button>
     </form>
     {% if news_data %}
         <h2>Results for "{{ search_query }}"</h2>
-        <ul>
+  
             {% for article in news_data['articles'] %}
-              <li><a href="{{ article['url'] }}">{{ article['title'] }}</a></li>
-            {% endfor %}
-        </ul>
+            <div style="background-color: aqua;margin: 20px;">
+            
+         <img src="{{ article.get('urlToImage') }}" alt="News Article Image" width="150" height="100" style="background-color: black;"><br>  
+         <a href="{{ article['url'] }}">{{ article['title'] }}</a> 
+            
+                <p>Published: {{ article['publishedAt'] }}</p>
+            <p>Source: {{ article['source']['name'] }}</p>  
+            
+            </div>
+             {% endfor %}
+        
     {% else %}
         <p>No results found. Try a different search term.</p>
     {% endif %}

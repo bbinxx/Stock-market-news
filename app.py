@@ -8,6 +8,13 @@ load_dotenv()
 api_key = os.getenv("apiKey")
 
 app = Flask(__name__)
+@app.route("/raw")
+def raw():
+    search_query = "GOOG"
+    url = f"https://newsapi.org/v2/everything?q={search_query}&apiKey={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    return data 
 
 @app.route("/")
 def hello():
