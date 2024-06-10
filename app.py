@@ -8,6 +8,7 @@ load_dotenv()
 api_key = os.getenv("apiKey")
 
 app = Flask(__name__)
+#Raw route for debugging
 @app.route("/raw")
 def raw():
     search_query = "GOOG"
